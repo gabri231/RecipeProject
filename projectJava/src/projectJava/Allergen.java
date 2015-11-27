@@ -1,13 +1,17 @@
 package projectJava;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Allergen {
-	private TreeMap<Integer, String> allergens;
+	private Map<Integer, String> allergens;
 	
+	/////////////////////////////////////////////////////////////////////////
+	//				CONSTRUCTOR DE LA CLASE ALERGENOS.
+	// 	Creamos un HashMap ya que no importa el orden. 
+	// 	A través del key podemos acceder a los datos.
 	public Allergen() {
-		this.allergens = new TreeMap<Integer, String>();
+		this.allergens = new HashMap<Integer, String>();
 		allergens.put(1, "gluten");
 		allergens.put(2, "shellfish");
 		allergens.put(3, "eggs");
@@ -22,34 +26,50 @@ public class Allergen {
 		allergens.put(12, "sulphites");
 		allergens.put(13, "mollusk");
 		allergens.put(14, "lupin");
-		allergens.put(15, "pine nuts");
 	}
 	
+	/////////////////////////////////////////////////////////////////////////
+	// 				GETTERS AND SETTERS
+	public Map<Integer, String> getAllergens() {
+		return allergens;
+	}
+
+	public void setAllergens(Map<Integer, String> allergens) {
+		this.allergens = allergens;
+	}
 	
-	/*
+	/////////////////////////////////////////////////////////////////////////
+	// 				METODOS DE LA CLASE ALERGENOS
+	/* ******************************************
+	 * obtenerAlergenoPorCodigo()
+	 * 		-> Devuelve el nombre del alergeno
 	 * 
-	 * @param codigo: codigo de los ingredientes
-	 * @return Object, que es el ingrediente completo.
+	 * @param codigo: codigo del alergeno
+	 * @return String, es el nombre del alergeno.
 	 */
-	public Object obtenerElementoPorCodigo(int codigo){
+	public String obtenerAlergenoPorCodigo(int codigo){
 		for (Map.Entry<Integer, String> entrada : this.allergens.entrySet()) {
 			if (entrada.getKey() == codigo) {
-				return entrada;
+				// Si encuentra el codigo, devuelve su nombre.
+				return entrada.getValue();
 			}
 		}
 		// Si no encuentra nada, devuelve null.
 		return null;
 	}
 
-	/*
+	/* ******************************************
+	 * obtenerAlergenoPorNombre()
+	 * 		-> Devuelve el codigo del alergeno
 	 * 
-	 * @param nombre: nombre del ingrediente
-	 * @return Object, que es el ingrediente completo.
+	 * @param nombre: nombre del alergeno
+	 * @return Integer, es el codigo del alergeno.
 	 */
-	public Object obtenerElementoPorNombre(String nombre){
+	public Integer obtenerAlergenoPorNombre(String nombre){
 		for (Map.Entry<Integer, String> entrada : this.allergens.entrySet()) {
 			if (entrada.getValue().equals(nombre)) {
-				return entrada;
+				// Si encuentra el nombre, devuelve su codigo.
+				return entrada.getKey();
 			}
 		}
 		// Si no encuentra nada, devuelve null.
