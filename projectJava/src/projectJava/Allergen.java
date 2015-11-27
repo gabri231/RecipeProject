@@ -75,7 +75,27 @@ public class Allergen {
 		// Si no encuentra nada, devuelve null.
 		return null;
 	}
-
+	
+	/* ******************************************
+	 * agregarAlergeno()
+	 * 		-> Agrega un nuevo alergeno al mapa de alergenos.
+	 * 
+	 * @param nombre: Nuevo alergeno a agregar al mapa de alergenos.
+	 * @return boolean, devuelve exito o fracaso.
+	 */
+	public boolean agregarAlergeno(String nombre){
+		try {
+			int codigo = allergens.size();
+			if (allergens.put(codigo, nombre) == null) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.err.println("Ha ocurrido un error al cargar el alergeno. ERROR: " + e.getMessage());
+		}
+		return false;
+	}
+	//*******************************************
+	
 	@Override
 	public String toString() {
 		return "Allergen [allergens=" + allergens + "]";
