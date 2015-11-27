@@ -75,5 +75,11 @@ public class Allergen {
 		// Si no encuentra nada, devuelve null.
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "Allergen [allergens=" + allergens + "]";
+	}
+	
 	
 }
