@@ -27,6 +27,9 @@ public class Allergen {
 		allergens.put(13, "mollusk");
 		allergens.put(14, "lupin");
 	}
+	//				FIN CONSTRUCTOR DE LA CLASE ALERGENOS.
+	/////////////////////////////////////////////////////////////////////////
+
 	
 	/////////////////////////////////////////////////////////////////////////
 	// 				GETTERS AND SETTERS
@@ -37,6 +40,9 @@ public class Allergen {
 	public void setAllergens(Map<Integer, String> allergens) {
 		this.allergens = allergens;
 	}
+	// 				FIN GETTERS AND SETTERS
+	/////////////////////////////////////////////////////////////////////////
+
 	
 	/////////////////////////////////////////////////////////////////////////
 	// 				METODOS DE LA CLASE ALERGENOS
@@ -94,7 +100,9 @@ public class Allergen {
 		}
 		return false;
 	}
-	//*******************************************
+	// 				FIN METODOS DE LA CLASE ALERGENOS
+	/////////////////////////////////////////////////////////////////////////
+
 	
 	@Override
 	public String toString() {

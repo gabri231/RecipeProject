@@ -1,35 +1,40 @@
 package projectJava;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class Ingredient {
 	private int code;
 	private String name;
 	private String measurement;
 	private double kCal;
-	private double carbohydrates;
+	private double carboHidrates;
 	private double protein;
 	private double fat;
 	private double salt;
-	private List<Allergen> allergens;
+	private HashSet<Allergen> allergens;
 	
-	
-	
-	public Ingredient(int code, String name, String measurement, double kCal, double carbohydrates, double protein,
-			double fat, double salt) {
+	/////////////////////////////////////////////////////////////////////////
+	//				CONSTRUCTOR DE LA CLASE INGREDIENTES.
+	// 	Creamos un *HashSet* ya que no importa el orden. 
+	// 	Si un alergeno ya existe en el ingrediente, no es necesario volver a introducirlo.	
+	public Ingredient(int code, String name, String measurement, double kCal, 
+					  double carbohydrates, double protein,	double fat, double salt) {
 		super();
 		this.code = code;
 		this.name = name;
 		this.measurement = measurement;
 		this.kCal = kCal;
-		this.carbohydrates = carbohydrates;
+		this.carboHidrates = carbohydrates;
 		this.protein = protein;
 		this.fat = fat;
 		this.salt = salt;
-		this.allergens = new ArrayList<Allergen>();
+		this.allergens = new HashSet<Allergen>();
 	}
+	//				FIN CONSTRUCTOR DE LA CLASE INGREDIENTES.
+	/////////////////////////////////////////////////////////////////////////
 
-	// Getters and setters
+	
+	/////////////////////////////////////////////////////////////////////////
+	// 				GETTERS AND SETTERS
 	public int getCode() {
 		return code;
 	}
@@ -55,10 +60,10 @@ public class Ingredient {
 		this.kCal = kCal;
 	}
 	public double getCarbohydrates() {
-		return carbohydrates;
+		return carboHidrates;
 	}
 	public void setCarbohydrates(double carbohydrates) {
-		this.carbohydrates = carbohydrates;
+		this.carboHidrates = carbohydrates;
 	}
 	public double getProtein() {
 		return protein;
@@ -78,65 +83,82 @@ public class Ingredient {
 	public void setSalt(double salt) {
 		this.salt = salt;
 	}
-	public List<Allergen> getAllergens() {
+	public HashSet<Allergen> getAllergens() {
 		return allergens;
 	}
-	public void setAllergens(ArrayList<Allergen> allergens) {
+	public void setAllergens(HashSet<Allergen> allergens) {
 		this.allergens = allergens;
 	}
+	//				FIN GETTERS AND SETTERS
+	/////////////////////////////////////////////////////////////////////////
+
 	
-	/*
+	/////////////////////////////////////////////////////////////////////////
+	// 				METODOS DE LA CLASE INGREDIENTES
+	/* *********************************************
+	 * buscarPorCodigo()
+	 * 		-> Devuelve un ingrediente completo.
 	 * 
 	 * @param listaIngredientes, lista de ingredientes
-	 * @param nombre, codigo de ingrediente a buscar
-	 * @return
+	 * @param codigo, codigo de ingrediente a buscar
+	 * @return objeto 'Ingredient'.
 	 */
-	public Ingredient buscarPorCodigo(List<Ingredient> ingrediente,int codigo){
-		for (int i = 0; i< ingrediente.size(); i++){
-			if (ingrediente.get(i).getCode() == codigo){
-				// Si encuentra un ingrediente se devuelve el ingrediente.
-				return ingrediente.get(i);
+	public Ingredient buscarPorCodigo(HashSet<Ingredient> listaIngredientes,int codigo){
+		if (!listaIngredientes.isEmpty()){	// Si la lista no está vacia se busca en ella.
+			for (Ingredient ingrediente : listaIngredientes){
+				if (ingrediente.getCode() == codigo){ // Se compara cada ingrediente en la lista.
+					// Si encuentra el codigo del ingrediente, lo devuelve.
+					return ingrediente;
+				}
 			}
 		}
-		// Si no encuentra nada se devuelve null.
-		return null;	
+		return null;
 	}
 
-	/*
+	/* *********************************************
+	 * buscarPorNombre()
+	 * 		-> Devuelve un ingrediente completo.
 	 * 
 	 * @param listaIngredientes, lista de ingredientes
 	 * @param nombre, nombre de ingrediente a buscar
-	 * @return el ingrediente encontrado 
+	 * @return objeto 'Ingredient'.
 	 */
-	public Ingredient buscarPorNombre(List<Ingredient> listaIngredientes,String nombre){
-		for (int i = 0; i< listaIngredientes.size(); i++){
-			if (listaIngredientes.get(i).getName() == nombre){
-				// Si encuentra un ingrediente, se devuelve el ingrediente
-				return listaIngredientes.get(i);
+	public Ingredient buscarPorNombre(HashSet<Ingredient> listaIngredientes,String nombre){
+		if (!listaIngredientes.isEmpty()){	// Si la lista no está vacia se busca en ella.
+			for (Ingredient ingrediente : listaIngredientes){
+				if (ingrediente.getName() == nombre){ // Se compara cada ingrediente en la lista.
+					// Si encuentra el nombre del ingrediente, lo devuelve.
+					return ingrediente;
+				}
 			}
 		}
-		// Si no encuentra nada, devuelve null
 		return null;
 	}
 	
 	
-	/*
-	 * @param allergen, alergia a comprobar 
-	 * @return true/false.
+	/* *********************************************
+	 * verificarAllergen()
+	 * 		-> Verifica si el ingrediente contiene el alergeno especificado.
+	 * 
+	 * @param codigoAllergen, codigo del alergeno a comprobar.
+	 * @return boolean TRUE/FALSE
 	 */
-	public boolean verificarAllergen(Allergen allergen) {
-		if (this.allergens.contains(allergen)) {
-			// Si lo encuentra dentro del mapa, devuelve TRUE,
+	public boolean verificarAllergen(int codigoAllergen) {
+		if (this.allergens.contains(codigoAllergen)) {
+			// Si lo encuentra dentro del hash de alergenos, devuelve TRUE,
 			return true;
 		}
-		//Si no lo encuentra dentro del mapa, devuelve false,
+		//Si no lo encuentra dentro del hash de alergenos, devuelve false,
 		return false;
 	}
+	// 				FIN METODOS DE LA CLASE INGREDIENTES	
+	/////////////////////////////////////////////////////////////////////////
+
 	
 	@Override
 	public String toString() {
 		return "Ingredient [code=" + code + ", name=" + name + ", measurement=" + measurement + ", kCal=" + kCal
-				+ ", carbohydrates=" + carbohydrates + ", protein=" + protein + ", fat=" + fat + ", salt=" + salt
+				+ ", carboHidrates=" + carboHidrates + ", protein=" + protein + ", fat=" + fat + ", salt=" + salt
 				+ ", allergens=" + allergens + "]";
 	}
 	
